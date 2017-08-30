@@ -1,0 +1,23 @@
+.a7-home {
+    margin-top: 50px;
+
+}
+
+.a7-home .stat-title {
+    font-weight: 700;
+}
+
+.a7-home .stat-value {
+    font-weight: 300;
+    font-size: 45px;
+}
+
+:host /deep/ table th {
+    border: 1px solid #e9ebec;
+}
+
+:host /deep/ table td {
+    border: 1px solid #e9ebec;
+}
+
+

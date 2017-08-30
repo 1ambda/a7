@@ -1,0 +1,129 @@
+server:
+  port: 8034
+spring:
+  profiles:
+    active: "local"
+logging:
+  level:
+    jdbc.sqlonly: ERROR
+    jdbc.audit: ERROR
+    jdbc.resultset: ERROR
+    jdbc.connection: ERROR
+    jdbc.sqltiming: ERROR
+    jdbc.resultsettable: ERROR
+management:
+  context-path: /actuactor
+  info:
+    git.mode: full
+# session-redis
+spring.session.store-type: redis
+spring.redis:
+  host: ${SPRING_REDIS_HOST:localhost}
+  port: ${SPRING_REDIS_PORT:6379}
+# stomp over websocket
+stomp:
+  host: ${STOMP_HOST:localhost}
+  port: ${STOMP_URL:61613}
+# rabbitMQ
+spring.rabbitmq:
+    host: ${SPRING_RABBITMQ_HOST:localhost}
+    password: ${SPRING_RABBITMQ_PASSWORD:guest}
+    username: ${SPRING_RABBITMQ_USERNAME:guest}
+# security
+security.basic.enabled: false
+# http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#production-ready-endpoints
+endpoints:
+  endpoints.sensitive: true
+  actuator.enabled: false
+  autoconfig.enabled: false
+  beans.enabled: false
+  configprops.enabled: false
+  env.enabled: false
+  info.enabled: false
+  logfile.enabled: false
+  mappings.enabled: false
+  shutdown.enabled: false
+  trace.enabled: false
+  dump.enabled: true
+  health.enabled: true
+  metrics.enabled: true
+---
+spring:
+  profiles: "local"
+  datasource:
+    url: jdbc:h2:mem:a7;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=TRUE
+    platform: h2
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+    initialize: true
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        # show_sql: true `Use org.hibernate.SQL DEBUG instead of`
+        # use_sql_comments: true
+        format_sql: true
+        temp:
+          use_jdbc_metadata_defaults: false # to boost spin-up time in local machine
+  h2:
+    console:
+      enabled: true
+logging:
+  level:
+    org.hibernate.tool.hbm2ddl: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+#    jdbc.connection: INFO
+#    jdbc.sqltiming: INFO
+    jdbc.resultsettable: INFO
+#    org.springframework.security: DEBUG
+management:
+  security:
+    enabled: false # access admin endpoints without auth
+endpoints:
+  info.enabled: true
+  logfile.enabled: true
+flyway:
+  enabled: false
+---
+spring:
+  profiles: "dev"
+  datasource:
+    url: jdbc:mariadb://${DATABASE_HOST:localhost}:${DATABASE_PORT:3306}/${DATABASE_NAME:a7}?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: ${DATABASE_USER:root}
+    password: ${DATABASE_PASSWORD:root}
+    driver-class-name: org.mariadb.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      data-source-properties:
+        # https://github.com/brettwooldridge/HikariCP/wiki/MySQL-Configuration
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+        useLocalSessionState: true
+        useLocalTransactionState: true
+        rewriteBatchedStatements: true
+        cacheResultSetMetadata: true
+        cacheServerConfiguration: true
+        elideSetAutoCommits: true
+        maintainTimeStats: false
+    initialize: false
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        hikari.dataSource.cachePrepStmts: false
+        dialect: org.hibernate.dialect.MariaDBDialect
+logging:
+  level:
+    jdbc.connection: INFO
+    jdbc.sqltiming: INFO
+    jdbc.resultsettable: INFO
+    com.zaxxer.hikari.HikariConfig: DEBUG
+

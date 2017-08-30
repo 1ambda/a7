@@ -1,0 +1,6 @@
+export const TOPIC_BROADCAST_ACCESS_COUNT = "/topic/access.count"
+export const TOPIC_UNICAST_ACCESS_COUNT = "/app/access.count"
+export const TOPIC_BROADCAST_WEBSOCKET_COUNT = "/topic/websocket.count"
+export const TOPIC_UNICAST_WEBSOCKET_COUNT = "/app/websocket.count"
+export const TOPIC_BROADCAST_SESSION_COUNT = "/topic/session.count"
+export const TOPIC_UNICAST_SESSION_COUNT = "/app/session.count"

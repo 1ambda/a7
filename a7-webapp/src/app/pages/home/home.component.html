@@ -1,0 +1,59 @@
+<div class="container a7-home">
+  <!-- counter + websocket -->
+  <div class="container" fxLayout fxLayout.xs="column">
+    <div fxFlex="33" fxFlex.xs="100%">
+      <md-card class="example-card">
+        <md-card-header>
+          <md-card-title class="stat-title">Toal Count</md-card-title>
+          <md-card-subtitle>Accumulated</md-card-subtitle>
+        </md-card-header>
+        <md-card-content>
+          <p class="stat-value">{{pagination.contentSize}}</p>
+        </md-card-content>
+      </md-card>
+    </div>
+    <div fxFlex="34" fxFlex.xs="100%">
+      <md-card class="example-card">
+        <md-card-header>
+          <md-card-title class="stat-title">Live Sessions</md-card-title>
+          <md-card-subtitle>Expiry: 2 minutes</md-card-subtitle>
+        </md-card-header>
+        <md-card-content>
+          <p class="stat-value">{{currentLiveSessionCount}}</p>
+        </md-card-content>
+      </md-card>
+    </div>
+    <div fxFlex="33" fxFlex.xs="100%">
+      <md-card class="example-card">
+        <md-card-header>
+          <md-card-title class="stat-title">Websocket Conns.</md-card-title>
+          <md-card-subtitle>Session Agnostic</md-card-subtitle>
+        </md-card-header>
+        <md-card-content>
+          <p class="stat-value">{{currentWebsocketConnectionCount}}</p>
+        </md-card-content>
+      </md-card>
+    </div>
+  </div>
+  <!-- table -->
+  <div class="container">
+    <ngx-datatable
+      class="material"
+      [rows]="rows"
+      [columns]="columns"
+      [rowHeight]="50"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [limit]="10"
+      [scrollbarH]="true"
+      [loadingIndicator]="tableLoading"
+      [externalPaging]="true"
+      [count]="pagination.contentSize"
+      [offset]="pagination.pageNumber"
+      [limit]="pagination.pageSize"
+      (page)='onPageChange($event)'
+      [externalSorting]="true"
+      (sort)="onSortChange($event)">
+    </ngx-datatable>
+  </div>
+</div>

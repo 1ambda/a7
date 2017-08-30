@@ -1,0 +1,25 @@
+<nav class="a7-navbar">
+    <a md-button routerLink="/" aria-label="A7">
+        <img class="a7-navbar-logo"
+             src="../../../assets/img/angular-white-transparent.svg"
+             alt="angular">
+        <span>A7</span>
+    </a>
+
+    <div class="flex-spacer"></div>
+    <button md-raised-button [mdMenuTriggerFor]="menu"
+            color="accent" class="a7-navbar-session-button">
+        {{session}}
+    </button>
+    <md-menu #menu="mdMenu">
+        <button md-menu-item (click)="createButtonClicked($event)">Create</button>
+        <button md-menu-item (click)="invalidateButtonClicked($event)">Invalidate</button>
+    </md-menu>
+
+    <a md-button href="https://github.com/1ambda/a7" aria-label="GitHub Repository">
+        <img class="a7-navbar-github-logo"
+             src="../../../assets/img/github-circle-white-transparent.svg"
+             alt="GitHub">
+        Github
+    </a>
+</nav>
