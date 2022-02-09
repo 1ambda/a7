@@ -22,7 +22,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
-		<lib.version.hibernate>5.2.10.Final</lib.version.hibernate>
+		<lib.version.hibernate>5.4.24.Final</lib.version.hibernate>
 		<lib.version.springfox>2.7.1-SNAPSHOT</lib.version.springfox>
 		<lib.version.mapstruct>1.2.0.CR2</lib.version.mapstruct>
 		<lib.version.lombok>1.16.14</lib.version.lombok>
